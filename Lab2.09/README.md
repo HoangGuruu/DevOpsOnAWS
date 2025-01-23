@@ -1,14 +1,32 @@
-# 2.11 Connect tới database bằng cli và thao tác với database
+# 2.9 Cài đặt database postgres, mysql trên EC2 Ubuntu
 
 ```sh
 # Connect to RDS Posrgres
-PGPASSWORD=12345678a psql -h localhost -p 5435 -U postgres -d database_name
-
-PGPASSWORD=12345678a psql -h devops-2-10.cnusie6q2fao.ap-southeast-1.rds.amazonaws.com -p 5432 -U postgres -d devops
-
+PGPASSWORD= psql -h localhost -p 5435 -U postgres -d database_name
 ```
 
 # PostgreSQL
+1. Install PostgreSQL
+First, update your package list and install PostgreSQL:
+
+```bash
+sudo apt update
+sudo apt install postgresql postgresql-contrib
+```
+2. Start and Enable PostgreSQL Service
+Ensure the PostgreSQL service is running and enabled to start on boot:
+
+```bash
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+```
+3. Access PostgreSQL
+Switch to the postgres user and open the PostgreSQL prompt:
+
+```bash
+sudo -i -u postgres
+psql
+```
 4. Create a Database
 To create a new database, use the CREATE DATABASE statement:
 

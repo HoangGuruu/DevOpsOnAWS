@@ -1,0 +1,50 @@
+# Terraform
+**/*.tfstate
+**/*.tfstate.backup
+**/.terraform/
+**/.terraform.lock.hcl
+
+# Node.js
+**/temp/
+**/node_modules/
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/package-lock.json
+**/yarn.lock
+
+# Environment variables
+**/.env
+**/.env.*
+
+# IDE/Editor specific
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+
+# System specific
+**/.DS_Store
+**/Thumbs.db
+
+# Logs
+**/logs
+**/*.log
+**/npm-debug.log*
+**/yarn-debug.log*
+
+# Misc
+**/*.bak
+**/*.tmp
+**/~*
+**/*.log
+
+# Ignore sensitive files
+**/*.key
+**/*.crt
+**/*.pem
+
+# Optional
+**/coverage/
+**/dist/
+**/build/

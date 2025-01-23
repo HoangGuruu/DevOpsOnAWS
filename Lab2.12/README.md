@@ -1,1 +1,1 @@
-# 2.12 Host một trang web tính bằng S3
+# 2.12 Làm quen với dịch vụ lưu trữ S3
