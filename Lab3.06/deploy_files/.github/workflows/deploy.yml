@@ -1,0 +1,55 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy Frontend
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@54.251.219.98 << EOF
+          ls
+          pwd
+          cd Day110
+          pwd
+          git pull origin main
+          cd public
+          pwd
+          npm install
+          pm2 delete frontend
+          pm2 start npm --name "frontend" -- start
+        EOF
+
+    - name: Deploy Backend
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh -i key -o StrictHostKeyChecking=no ubuntu@54.251.219.98 << EOF
+          ls
+          pwd
+          cd Day110
+          pwd
+          git pull origin main
+          cd server
+          pwd
+          npm install
+          pm2 delete backend
+          pm2 start npm --name "backend" -- start
+        EOF
+
+
