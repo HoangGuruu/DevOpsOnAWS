@@ -1,0 +1,22 @@
+stages:
+  - deploy
+
+deploy_to_ec2:
+  stage: deploy
+  image: ubuntu:latest
+  script:
+    
+    - mkdir -p ~/.ssh
+    - echo "$EC2_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - |
+      ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@13.229.59.101 << EOF
+        ls
+        pwd
+        cd hihi
+        pwd
+        git pull origin main
+        sudo docker compose up -d --build
+      EOF
+  only:
+    - main
