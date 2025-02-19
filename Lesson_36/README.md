@@ -1,3 +1,4 @@
+![Alt text](../Banner.png)
 # Install AWS CLI + eksctl + Configure AWS Configure
 
 # Create EKS Cluster & Node Groups
