@@ -2,10 +2,14 @@
 
 <center>
 
-# [Khóa Học DevOps On AWS]() 
+<p align="center">
+ <h1 align="center"> <a href="https://example.com" target="_blank">DevOps On AWS</a> </h1>
+</p>
+
+
 <!-- </div> -->
 <p align="center">
- <h2 align="center"> 🧑‍💻 DevOps Skills </h2>
+ <h3 align="center"> 🧑‍💻 DevOps Skills </h3>
 </p>
 
 <p align="center"> 
@@ -30,8 +34,9 @@
  <img height="25px" src="https://img.shields.io/badge/Kubernetes-%23326ce5.svg?style=flat&logo=kubernetes&logoColor=white" align="center" />  
  <img height="25px" src="https://img.shields.io/badge/Minikube-3C3C3C?style=flat&logo=kubernetes&logoColor=white" align="center" />  
 </p>
-<div align="center">
 
+
+<div align="center">
 
 
 | Bài | Nội dung |
@@ -79,7 +84,6 @@
 | 41 | Học gì tiếp theo?                     |
 | 42 | Tham khảo nội dung cho Series mới     |
 </div>
-
 </center>
 
 <!-- </div> -->
