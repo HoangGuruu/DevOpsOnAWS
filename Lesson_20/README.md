@@ -1,3 +1,5 @@
+![Alt text](../Banner.png)
+
 # 3.2 Use Git 
 ## Tóm tắt lệnh thường dùng hằng ngày
 ```sh

@@ -1,3 +1,5 @@
+![Alt text](../Banner.png)
+
 # 2.9 Cài đặt database postgres, mysql trên EC2 Ubuntu
 
 ```sh

@@ -1,2 +1,1 @@
-# 2.10 Tạo database RDS trên AWS (postgres, mysql)
-
+![Alt text](../Banner.png)

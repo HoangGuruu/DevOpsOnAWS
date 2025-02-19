@@ -1,3 +1,5 @@
+![Alt text](../Banner.png)
+
 # 2.11 Connect tới database bằng cli và thao tác với database
 
 ```sh

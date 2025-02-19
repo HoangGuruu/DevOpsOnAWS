@@ -1,3 +1,5 @@
+![Alt text](../Banner.png)
+
 # 3.3 Use Docker
 ## Tóm tắt lệnh thường dùng hằng ngày
 ```sh
