@@ -1,5 +1,7 @@
 ![Alt text](./Banner.png)
 
+<center>
+
 # [Khóa Học DevOps On AWS]() 
 <!-- </div> -->
 <p align="center">
@@ -28,9 +30,10 @@
  <img height="25px" src="https://img.shields.io/badge/Kubernetes-%23326ce5.svg?style=flat&logo=kubernetes&logoColor=white" align="center" />  
  <img height="25px" src="https://img.shields.io/badge/Minikube-3C3C3C?style=flat&logo=kubernetes&logoColor=white" align="center" />  
 </p>
-
-
 <div align="center">
+
+
+
 | Bài | Nội dung |
 |----|--------------------------------|
 | 1  | Giới thiệu về DevOps On AWS    |
@@ -77,6 +80,7 @@
 | 42 | Tham khảo nội dung cho Series mới     |
 </div>
 
+</center>
 
 <!-- </div> -->
 <p align="center">
