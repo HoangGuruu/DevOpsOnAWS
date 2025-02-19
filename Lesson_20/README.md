@@ -1,6 +1,6 @@
 ![Alt text](../Banner.png)
 
-# 3.2 Use Git 
+# Bài 20 Dùng git làm việc với source code
 ## Tóm tắt lệnh thường dùng hằng ngày
 ```sh
 git config --list

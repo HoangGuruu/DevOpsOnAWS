@@ -1,20 +1,22 @@
 ![Alt text](../Banner.png)
-# Install AWS CLI + eksctl + Configure AWS Configure
+# Bài 36 Triển khai một cụm Kubernetes EKS 
 
-# Create EKS Cluster & Node Groups
+## Cài đặt AWS CLI + eksctl + Cấu hình AWS Configure
 
-## Step-00: Introduction
-- Understand about EKS Core Objects
+## Tạo cụm EKS & Nhóm Node
+
+## Bước 00: Giới thiệu
+- Hiểu về các thành phần cốt lõi của EKS
   - Control Plane
-  - Worker Nodes & Node Groups
+  - Worker Nodes & Nhóm Node
   - Fargate Profiles
   - VPC
-- Create EKS Cluster
-- Associate EKS Cluster to IAM OIDC Provider
-- Create EKS Node Groups
-- Verify Cluster, Node Groups, EC2 Instances, IAM Policies and Node Groups
+- Tạo cụm EKS
+- Liên kết cụm EKS với IAM OIDC Provider
+- Tạo nhóm Node cho EKS
+- Kiểm tra cụm, nhóm Node, EC2 Instances, IAM Policies và nhóm Node
 
-## Update Access Key 
+## Cập nhật Access Key 
 
 ```sh
 export AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY
@@ -22,10 +24,10 @@ export AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY
 export AWS_REGION=ap-southeast-1
 ```
 
-## Step-01: Create EKS Cluster using eksctl
-- It will take 15 to 20 minutes to create the Cluster Control Plane 
+## Bước 01: Tạo cụm EKS bằng eksctl
+- Quá trình tạo Control Plane của cụm sẽ mất khoảng 15-20 phút.
 ```
-# Create Cluster
+# Tạo cụm
 eksctl create cluster --name=eksdemo1 \
                       --region=ap-southeast-1 \
                       --zones=ap-southeast-1a,ap-southeast-1b \
@@ -37,40 +39,36 @@ eksctl create cluster --name=eksdemo3 \
                       --without-nodegroup \
                       --version=1.32
 
-# Get List of clusters
+# Lấy danh sách cụm
 eksctl get cluster                  
 ```
 
-
-## Step-02: Create & Associate IAM OIDC Provider for our EKS Cluster
-- To enable and use AWS IAM roles for Kubernetes service accounts on our EKS cluster, we must create &  associate OIDC identity provider.
-- To do so using `eksctl` we can use the  below command. 
-- Use latest eksctl version 
+## Bước 02: Tạo & Liên kết IAM OIDC Provider cho cụm EKS
+- Để sử dụng IAM roles cho tài khoản dịch vụ Kubernetes trên cụm EKS, chúng ta cần tạo và liên kết OIDC identity provider.
+- Sử dụng lệnh `eksctl` sau:
 ```                   
-# Template
+# Mẫu lệnh
 eksctl utils associate-iam-oidc-provider \
     --region region-code \
-    --cluster <cluter-name> \
+    --cluster <cluster-name> \
     --approve
 
-# Replace with region & cluster name
+# Thay thế bằng region & tên cụm
 eksctl utils associate-iam-oidc-provider \
     --region ap-southeast-1 \
     --cluster eksdemo2 \
     --approve
 ```
 
+## Bước 03: Tạo Keypair EC2
+- Tạo một EC2 Keypair mới có tên `Instance_Key_DevOps_On_AWS`
+- Sử dụng keypair này khi tạo nhóm Node của EKS.
+- Keypair này sẽ giúp chúng ta đăng nhập vào Worker Nodes của EKS thông qua Terminal.
 
-
-## Step-03: Create EC2 Keypair
-- Create a new EC2 Keypair with name as `Instance_Key_DevOps_On_AWS`
-- This keypair we will use it when creating the EKS NodeGroup.
-- This will help us to login to the EKS Worker Nodes using Terminal.
-
-## Step-04: Create Node Group with additional Add-Ons in Public Subnets
-- These add-ons will create the respective IAM policies for us automatically within our Node Group role.
- ```
-# Create Public Node Group   
+## Bước 04: Tạo nhóm Node với các Add-Ons bổ sung trong Public Subnets
+- Các add-ons này sẽ tự động tạo IAM policies cho chúng ta trong vai trò nhóm Node.
+```
+# Tạo nhóm Node Public   
 eksctl create nodegroup --cluster=eksdemo1 \
                         --region=ap-southeast-1 \
                         --name=eksdemo1-ng-public1 \
@@ -89,86 +87,86 @@ eksctl create nodegroup --cluster=eksdemo1 \
                         --alb-ingress-access 
 ```
 
-## Step-05: Verify Cluster & Nodes
+## Bước 05: Kiểm tra cụm & Nodes
 
-### Verify NodeGroup subnets to confirm EC2 Instances are in Public Subnet
-- Verify the node group subnet to ensure it created in public subnets
-  - Go to Services -> EKS -> eksdemo -> eksdemo1-ng1-public
-  - Click on Associated subnet in **Details** tab
-  - Click on **Route Table** Tab.
-  - We should see that internet route via Internet Gateway (0.0.0.0/0 -> igw-xxxxxxxx)
+### Kiểm tra subnet nhóm Node để xác nhận EC2 Instances ở Public Subnet
+- Vào **Services -> EKS -> eksdemo -> eksdemo1-ng1-public**
+- Nhấp vào **Associated subnet** trong tab **Details**
+- Chuyển sang tab **Route Table**
+- Kiểm tra xem route internet có thông qua Internet Gateway (0.0.0.0/0 -> igw-xxxxxxxx)
 
-### Verify Cluster, NodeGroup in EKS Management Console
-- Go to Services -> Elastic Kubernetes Service -> eksdemo
+### Kiểm tra cụm, nhóm Node trong EKS Management Console
+- Vào **Services -> Elastic Kubernetes Service -> eksdemo**
 
-### List Worker Nodes
+### Liệt kê Worker Nodes
 ```
-# List EKS clusters
+# Liệt kê cụm EKS
 eksctl get cluster
 
-# List NodeGroups in a cluster
+# Liệt kê nhóm Node trong cụm
 eksctl get nodegroup --cluster=<clusterName>
 
-# Update kubeconfig
+# Cập nhật kubeconfig
 aws eks update-kubeconfig --region ap-southeast-1 --name eksdemo1
 
-# List Nodes in current kubernetes cluster
+# Liệt kê Nodes trong cụm Kubernetes hiện tại
 kubectl get nodes -o wide
 
-# Our kubectl context should be automatically changed to new cluster
+# Xem kubeconfig hiện tại
 kubectl config view --minify
 ```
 
-### Verify Worker Node IAM Role and list of Policies
-- Go to Services -> EC2 -> Worker Nodes
-- Click on **IAM Role associated to EC2 Worker Nodes**
+### Kiểm tra IAM Role và danh sách Policies của Worker Node
+- Vào **Services -> EC2 -> Worker Nodes**
+- Nhấp vào **IAM Role liên kết với Worker Nodes**
 
-### Verify Security Group Associated to Worker Nodes
-- Go to Services -> EC2 -> Worker Nodes
-- Click on **Security Group** associated to EC2 Instance which contains `remote` in the name.
+### Kiểm tra Security Group liên kết với Worker Nodes
+- Vào **Services -> EC2 -> Worker Nodes**
+- Nhấp vào **Security Group** liên kết với EC2 Instance chứa `remote` trong tên.
 
-### Verify CloudFormation Stacks
-- Verify Control Plane Stack & Events
-- Verify NodeGroup Stack & Events
+### Kiểm tra CloudFormation Stacks
+- Kiểm tra **Control Plane Stack & Events**
+- Kiểm tra **NodeGroup Stack & Events**
 
-### Login to Worker Node using Keypai kube-demo
-- Login to worker node
+### Đăng nhập vào Worker Node bằng Keypair kube-demo
 ```
-# For MAC or Linux or Windows10
+# Dành cho MAC, Linux hoặc Windows 10
 ssh -i Instance_Key_DevOps_On_AWS.pem ec2-user@<Public-IP-of-Worker-Node>
-
 ```
 
-## Step-06: Update Worker Nodes Security Group to allow all traffic
-- We need to allow `All Traffic` on worker node security group
+## Bước 06: Cập nhật Security Group của Worker Nodes để cho phép tất cả lưu lượng
 
-## Additional References
+## Tài liệu tham khảo
 - https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
 - https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html
 
 
+# Xóa cụm EKS & Nhóm Node
 
-# Delete EKS Cluster & Node Groups
+- Chú ý: Xóa hết các workload đã deploy để qáu trình xóa clsuter nhanh hơn, không bị treo
+- Xóa hết các namespace đã dùng, cả workload của ns default
 
-## Step-01: Delete Node Group
-- We can delete a nodegroup separately using below `eksctl delete nodegroup`
+`kubectl delete ns {NameOfNamespace}`
+
+## Bước 01: Xóa nhóm Node
 ```
-# List EKS Clusters
+# Liệt kê cụm EKS
 eksctl get clusters
 
-# Capture Node Group name
+Xóa hết các namespace đã dùng, cả workload của ns default
+
+# Lấy tên nhóm Node
 eksctl get nodegroup --cluster=<clusterName>
 eksctl get nodegroup --cluster=eksdemo1
 
-# Delete Node Group
+# Xóa nhóm Node
 eksctl delete nodegroup --cluster=<clusterName> --name=<nodegroupName>
 eksctl delete nodegroup --cluster=eksdemo1 --name=eksdemo1-ng-public1
 ```
 
-## Step-02: Delete Cluster  
-- We can delete cluster using `eksctl delete cluster`
+## Bước 02: Xóa cụm
 ```
-# Delete Cluster
+# Xóa cụm
 eksctl delete cluster <clusterName>
 eksctl delete cluster eksdemo1
 ```

@@ -1,3 +1,4 @@
 ![Alt text](../Banner.png)
 
-# 2.12 Làm quen với dịch vụ lưu trữ S3
+# Bài 17 Làm quen với dịch vụ lưu trữ S3
+

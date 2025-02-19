@@ -1,2 +1,2 @@
 ![Alt text](../Banner.png)
-# 2.13 Host một trang web tính bằng S3
+# Bài 18 Host static web trên AWS S3

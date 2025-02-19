@@ -1,11 +1,8 @@
 ![Alt text](../Banner.png)
 
-# 2.9 Cài đặt database postgres, mysql trên EC2 Ubuntu
+# Bài 14 Cài đặt Database trên EC2 Ubuntu
 
-```sh
-# Connect to RDS Posrgres
-PGPASSWORD= psql -h localhost -p 5435 -U postgres -d database_name
-```
+## Cài đặt database postgres, mysql trên EC2 Ubuntu
 
 # PostgreSQL
 1. Install PostgreSQL
@@ -101,4 +98,10 @@ DROP TABLE mytable;
 15. Delete database
 ```css
 DROP DATABASE mydatabase;
+```
+
+-----------------------
+```sh
+# Câu lệnh chung connect tới server database
+PGPASSWORD= psql -h localhost -p 5435 -U postgres -d database_name
 ```
