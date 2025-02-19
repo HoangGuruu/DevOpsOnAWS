@@ -30,6 +30,7 @@
  <img height="25px" src="https://img.shields.io/badge/Kubernetes-%23326ce5.svg?style=flat&logo=kubernetes&logoColor=white" align="center" />  
  <img height="25px" src="https://img.shields.io/badge/Minikube-3C3C3C?style=flat&logo=kubernetes&logoColor=white" align="center" />  
 </p>
+<div align="center">
 
 | Bài | Nội dung |
 |:--:|:------------------------------:|
@@ -38,6 +39,7 @@
 | 3  | Nguồn tài liệu DevOps          |
 | 4  | Vấn đề cẩn trọng trong DevOps  |
 | 5  | Credit thực hành Cloud AWS     |
+</div>
 
 | Bài | Nội dung |
 |----|--------------------------------|
