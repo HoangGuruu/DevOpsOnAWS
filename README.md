@@ -31,6 +31,13 @@
  <img height="25px" src="https://img.shields.io/badge/Minikube-3C3C3C?style=flat&logo=kubernetes&logoColor=white" align="center" />  
 </p>
 
+| Bài | Nội dung |
+|:--:|:------------------------------:|
+| 1  | Giới thiệu về DevOps On AWS    |
+| 2  | DevOps RoadMap Sơ lược         |
+| 3  | Nguồn tài liệu DevOps          |
+| 4  | Vấn đề cẩn trọng trong DevOps  |
+| 5  | Credit thực hành Cloud AWS     |
 
 | Bài | Nội dung |
 |----|--------------------------------|
