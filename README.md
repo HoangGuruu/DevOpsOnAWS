@@ -3,7 +3,7 @@
 <center>
 
 <p align="center">
- <h1 align="center"> <a href="https://example.com" target="_blank">DevOps On AWS</a> </h1>
+ <h1 align="center"> <a href="https://devopsedu.vn/?post_type=courses&p=33240" target="_blank">DevOps On AWS</a> </h1>
 </p>
 
 
