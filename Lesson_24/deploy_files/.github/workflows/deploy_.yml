@@ -28,7 +28,7 @@ jobs:
           pwd
           git pull origin main
           docker compose up -d 
-        EOF
+        >> EOF
 
 
 
