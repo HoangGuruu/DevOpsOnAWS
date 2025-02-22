@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+
+    environment {
+        EC2_SSH_PRIVATE_KEY = credentials('ec2_devops') // Replace with your Jenkins credentials ID
+        EC2_HOST = '13.229.59.101'
+        REPO_DIR = 'Lab-3.06'
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Deploy to EC2') {
+            steps {
+                script {
+                    sshagent(['ec2_devops']) { // Replace with your Jenkins credentials ID
+                        sh """
+                        ssh -o StrictHostKeyChecking=no ubuntu@${EC2_HOST} << EOF
+                          ls
+                          pwd
+                          cd ${REPO_DIR}
+                          pwd
+                          git pull origin main
+                          sudo docker compose up -d --build
+                        >> EOF
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment completed successfully!'
+        }
+        failure {
+            echo 'Deployment failed.'
+        }
+    }
+}
